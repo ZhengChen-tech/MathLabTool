@@ -21,7 +21,7 @@ const lib = WebAssembly.instantiate(new Uint8Array(buf)).
 );
 
 var addon_math = './addon/mathlabtool';
-// var addon_math = 'D:/mathlabtool/addon/build/Release/mathlabtool';
+// var addon_math = 'D:/mlt_addon/addon/build/Release/mathlabtool';
 
 var mlt_addon = null;
 var page_handle = null;
@@ -592,7 +592,7 @@ global.mlt_draw_graph = function(graph_type, title, width, height, graph_data) {
 				graph_data['data'][idx]['formula'] = graph_data['data'][idx]['formula'].split(' ').join('');
 				graph_data['data'][idx]['formula_len'] = graph_data['data'][idx]['formula'].length;
 			}
-			graph_data['data'][idx]['data_len'] = 80;
+			graph_data['data'][idx]['data_len'] = 160;
 			// console.log(graph_data['data'][idx]);
 		}
 		var ret_data = mlt_addon.draw_graph_formula(addon_graph_type, width - 18, height - 44, graph_data);
@@ -612,7 +612,9 @@ global.mlt_draw_graph = function(graph_type, title, width, height, graph_data) {
 						);
 				} else {
 					var i_val_number = Number(ret_data[idx][i]);
-					ret = graph_data['data'][idx]['formula_code'](i_val_number).toString();
+					// console.log("i_val_number:", i_val_number);
+					ret = graph_data['data'][idx]['formula_code'](i_val_number).toFixed(9).toString();
+					// console.log("ret:", ret);
 				}
 				// console.log(ret_data[idx][i], ret);
 				var graph_coord = undefined;
@@ -975,6 +977,10 @@ global.mlt_hp_ln_add = function(add1, add2) {
 	var expect_sum_len = expect_sum ? Buffer.byteLength(expect_sum, 'utf8') : 0;
 	
 	return mlt_addon.n_hp_ln_add(add1, add1_len, add2, add2_len, true, expect_sum, expect_sum_len);
+};
+
+global.mlt_dft = function(data) {
+	return mlt_addon.mlt_dft(data);
 };
 
 let mainWindow;

@@ -983,6 +983,14 @@ global.mlt_dft = function(data) {
 	return mlt_addon.mlt_dft(data);
 };
 
+global.mlt_fft_r = function(data) {
+	return mlt_addon.mlt_fft_r(data);
+};
+
+global.mlt_fft = function(data) {
+	return mlt_addon.mlt_fft(data);
+};
+
 let mainWindow;
 
 ipcMain.on("ping", (event, arg) => {

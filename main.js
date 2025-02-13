@@ -991,6 +991,14 @@ global.mlt_fft = function(data) {
 	return mlt_addon.mlt_fft(data);
 };
 
+global.mlt_liner_r = function(data) {
+	return mlt_addon.mlt_liner_r(data);
+};
+
+global.mlt_low_pass = function(data, kernel_size) {
+	return mlt_addon.mlt_low_pass(data, kernel_size);
+};
+
 let mainWindow;
 
 ipcMain.on("ping", (event, arg) => {

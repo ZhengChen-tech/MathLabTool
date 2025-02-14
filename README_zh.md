@@ -12,6 +12,7 @@
 
 ## 资源
 
+[GitCode](https://gitcode.com/zhengchen-tech/MathLabTool)  
 [Gitee](https://gitee.com/xxyjskx1987/MathLabTool)  
 [Github](https://github.com/xxyjskx1987/MathLabTool)
 

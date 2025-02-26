@@ -19,7 +19,7 @@
 ## 授权
 
 ```
-控制台出现invalid anth
+控制台出现invalid auth
 将\extra_files\authorization_code
 替换到安装目录的同路径下
 ```

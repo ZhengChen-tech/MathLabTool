@@ -16,6 +16,14 @@
 [Gitee](https://gitee.com/xxyjskx1987/MathLabTool)  
 [Github](https://github.com/xxyjskx1987/MathLabTool)
 
+## 授权
+
+```
+控制台出现invalid anth
+将\extra_files\authorization_code
+替换到安装目录的同路径下
+```
+
 ## 环境
 
 ```

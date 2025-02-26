@@ -18,9 +18,9 @@ English | [简体中文](./README_zh.md)
 ## Authorization
 
 ```
-invalid auth appears on the console
-will \extra_files\authorization_code
-switch to the same path as the installation directory
+"invalid auth" appears on the console
+\extra_files\authorization_code
+replace to the same path on the installation directory
 ```
 
 ## Environment

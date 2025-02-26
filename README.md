@@ -15,6 +15,14 @@ English | [简体中文](./README_zh.md)
 [Gitee](https://gitee.com/xxyjskx1987/MathLabTool)  
 [Github](https://github.com/xxyjskx1987/MathLabTool)
 
+## Authorization
+
+```
+invalid auth appears on the console
+will \extra_files\authorization_code
+switch to the same path as the installation directory
+```
+
 ## Environment
 
 ```

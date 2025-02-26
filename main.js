@@ -999,6 +999,10 @@ global.mlt_low_pass = function(data, kernel_size) {
 	return mlt_addon.mlt_low_pass(data, kernel_size);
 };
 
+global.mlt_mlp = function(layout, datas, label, learn_rate, limit, predict_data) {
+	return mlt_addon.mlt_mlp(layout, datas, label, learn_rate, limit, predict_data);
+};
+
 let mainWindow;
 
 ipcMain.on("ping", (event, arg) => {

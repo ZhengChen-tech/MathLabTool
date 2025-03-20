@@ -33,7 +33,8 @@
 		});
 
 		var web_render = {};
-		web_render.send = function(event, arg) {
+		web_render.ipcRenderer = {};
+		web_render.ipcRenderer.send = function(event, arg) {
 			var msg_array = arg.split('|');
 			if(msg_array[0] == 'run_str') {
 				try {

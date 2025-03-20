@@ -40,9 +40,17 @@
 				try {
 					eval(msg_array[1]);
 				} catch (e) {
-					web_render.on('pong', 'page_console_log|' + e.toString() + '\n');
+					web_render.ipcRenderer.call_event('pong', 'page_console_log|' + e.toString() + '\n');
 				}
 			}
+		};
+
+		web_render.ipcRenderer.on = function(event, arg) {
+			web_render.ipcRenderer.on_event[event] = arg;
+		};
+
+		web_render.ipcRenderer.call_event = function(event, arg) {
+			web_render.ipcRenderer.on_event[event](this, arg);
 		};
 
 		const { ipcRenderer } = web_render;

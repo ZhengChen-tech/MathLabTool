@@ -1,4 +1,3 @@
-const { ipcRenderer } = require('electron')
 
 function clear_console() {
 	$('#page_console_log').html('');
@@ -246,5 +245,4 @@ function run_click() {
 		ipcRenderer.send("ping", 'run_str|' + 
 			code_editors['editor' + index].getValue());
 	}
-	
 }

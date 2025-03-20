@@ -31,6 +31,21 @@
 			console.log(add);
 			
 		});
+
+		var web_render = {};
+		web_render.send = function(event, arg) {
+			var msg_array = arg.split('|');
+			if(msg_array[0] == 'run_str') {
+				try {
+					eval(msg_array[1]);
+				} catch (e) {
+					web_render.on('pong', 'page_console_log|' + e.toString() + '\n');
+				}
+			}
+		};
+
+		const { ipcRenderer } = web_render;
+
 	</script>
 	<script type="text/javascript" src="jquery-easyui-1.10.8/jquery.easyui.min.js"></script>
 	<script src="js/pre_renderer.js"></script>

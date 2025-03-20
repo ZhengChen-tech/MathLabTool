@@ -1,6 +1,6 @@
 const { ipcMain } = require('electron');
 
-ipcMain.on("ping", (event, arg) => {
+ipcMain.on("ping", function (event, arg) {
 	var msg_array = arg.split('|');
 	if(msg_array[0] == 'page_handle') {
 		page_handle = event;

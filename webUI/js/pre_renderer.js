@@ -108,7 +108,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-	ipcRenderer.on("pong", (event, message) => {
+	ipcRenderer.on("pong", function (event, message) {
 		var msg_array = message.split('|');
 		if(msg_array[0] == 'set_dir'){
 			var node = $('#tree_dir').tree('find', msg_array[1]);

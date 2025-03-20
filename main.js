@@ -262,21 +262,6 @@ function fileDisplay(filePath, handle, tree_parent, filename) {
 	});
 }
 
-global.mlt_page_console_log = function(...log_str) {
-	// console.log(typeof log_str, log_str, JSON.stringify(log_str));
-	var ret = "";
-	for(var idx in log_str) {
-		if(typeof log_str[idx] == 'object') {
-			ret += JSON.stringify(log_str[idx]);
-		} else {
-			ret += log_str[idx];
-		}
-	}
-	if(page_handle){
-		page_handle.sender.send('pong', 'page_console_log|' + ret);
-	}
-};
-
 // JSON.stringify(json_str, null, 2)
 global.mlt_page_console_json = function(json_str) {
 	if(page_handle){

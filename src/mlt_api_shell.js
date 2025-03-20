@@ -1,5 +1,20 @@
 const { ipcMain } = require('electron');
 
+mlt_page_console_log = function(...log_str) {
+	// console.log(typeof log_str, log_str, JSON.stringify(log_str));
+	var ret = "";
+	for(var idx in log_str) {
+		if(typeof log_str[idx] == 'object') {
+			ret += JSON.stringify(log_str[idx]);
+		} else {
+			ret += log_str[idx];
+		}
+	}
+	if(page_handle){
+		page_handle.sender.send('pong', 'page_console_log|' + ret);
+	}
+};
+
 ipcMain.on("ping", function (event, arg) {
 	var msg_array = arg.split('|');
 	if(msg_array[0] == 'page_handle') {

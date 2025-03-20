@@ -5,6 +5,7 @@
 	<!-- <meta http-equiv="Content-Security-Policy" content="img-src 'self' data: *"> -->
 	<!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline';"> -->
 	<title>MathLabTools</title>
+    <link rel="icon" type="image/x-icon" href="../public/icon/mathlabtool.ico">
 	<link rel="stylesheet" type="text/css" href="css/chat_nlp.css">
 	<link rel="stylesheet" type="text/css" href="jquery-easyui-1.10.8/themes/bootstrap/easyui.css">
 	<link rel="stylesheet" type="text/css" href="jquery-easyui-1.10.8/themes/icon.css">
@@ -60,13 +61,14 @@
 			web_render.ipcRenderer.call_event(event, arg);
 		};
 
-		function require(import_module) {
+		addon_math = "";
+		var require = function (import_module) {
 			if(import_module == 'electron') {
 				return web_render;
 			}
 
 			return null;
-		}
+		};
 
 	</script>
 	<script type="text/javascript" src="jquery-easyui-1.10.8/jquery.easyui.min.js"></script>

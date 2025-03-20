@@ -246,4 +246,5 @@ function run_click() {
 		ipcRenderer.send("ping", 'run_str|' + 
 			code_editors['editor' + index].getValue());
 	}
+	
 }

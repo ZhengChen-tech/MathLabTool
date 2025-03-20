@@ -34,6 +34,8 @@
 
 		var web_render = {};
 		web_render.ipcRenderer = {};
+		web_render.ipcMain = {};
+
 		web_render.ipcRenderer.on_event = {};
 		web_render.ipcRenderer.send = function(event, arg) {
 			var msg_array = arg.split('|');
@@ -45,13 +47,20 @@
 				}
 			}
 		};
-
 		web_render.ipcRenderer.on = function(event, arg) {
 			web_render.ipcRenderer.on_event[event] = arg;
 		};
-
 		web_render.ipcRenderer.call_event = function(event, arg) {
+			console.log(this);
 			web_render.ipcRenderer.on_event[event](this, arg);
+		};
+
+		web_render.ipcMain.on_event = {};
+		web_render.ipcMain.on = function(event, arg) {
+			web_render.ipcMain.on_event[event] = arg;
+		};
+		web_render.ipcMain.call_event = function(event, arg) {
+			web_render.ipcMain.on_event[event](this, arg);
 		};
 
 		function require(import_module) {
@@ -65,6 +74,7 @@
 	</script>
 	<script type="text/javascript" src="jquery-easyui-1.10.8/jquery.easyui.min.js"></script>
 	<script src="js/pre_renderer.js"></script>
+	<script src="../main.js"></script>
 
     <style>
 		canvas:focus {

@@ -38,24 +38,27 @@
 
 		web_render.ipcRenderer.on_event = {};
 		web_render.ipcRenderer.send = function(event, arg) {
-			var msg_array = arg.split('|');
-			if(msg_array[0] == 'run_str') {
-				try {
-					eval(msg_array[1]);
-				} catch (e) {
-					web_render.ipcRenderer.call_event('pong', 'page_console_log|' + e.toString() + '\n');
-				}
-			}
+			web_render.ipcMain.call_event(event, arg);
+			// var msg_array = arg.split('|');
+			// if(msg_array[0] == 'run_str') {
+			// 	try {
+			// 		eval(msg_array[1]);
+			// 	} catch (e) {
+			// 		web_render.ipcRenderer.call_event('pong', 'page_console_log|' + e.toString() + '\n');
+			// 	}
+			// }
 		};
 		web_render.ipcRenderer.on = function(event, arg) {
 			web_render.ipcRenderer.on_event[event] = arg;
 		};
 		web_render.ipcRenderer.call_event = function(event, arg) {
-			console.log(this);
 			web_render.ipcRenderer.on_event[event](this, arg);
 		};
 
 		web_render.ipcMain.on_event = {};
+		web_render.ipcMain.sender.send = function(event, arg) {
+			web_render.ipcRenderer.call_event(event, arg);
+		};
 		web_render.ipcMain.on = function(event, arg) {
 			web_render.ipcMain.on_event[event] = arg;
 		};

@@ -54,7 +54,13 @@
 			web_render.ipcRenderer.on_event[event](this, arg);
 		};
 
-		const { ipcRenderer } = web_render;
+		function require(import_module) {
+			if(import_module == 'electron') {
+				return web_render;
+			}
+
+			return null;
+		}
 
 	</script>
 	<script type="text/javascript" src="jquery-easyui-1.10.8/jquery.easyui.min.js"></script>

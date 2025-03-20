@@ -1,3 +1,4 @@
+const { ipcRenderer } = require('electron');
 
 function clear_console() {
 	$('#page_console_log').html('');

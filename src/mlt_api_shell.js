@@ -1,5 +1,8 @@
 const { ipcMain } = require('electron');
 
+page_handle = null;
+mlt_addon = null;
+
 mlt_page_console_log = function(...log_str) {
 	// console.log(typeof log_str, log_str, JSON.stringify(log_str));
 	var ret = "";
@@ -15,11 +18,31 @@ mlt_page_console_log = function(...log_str) {
 	}
 };
 
+mlt_mlp = function(layout, datas, label, learn_rate, limit, predict_data, activate_func, loss_func, update_w_func) {
+	if(activate_func == undefined) {
+		activate_func = [];
+		activate_func[0] = 0;
+		for(var i = 1; i < layout.length; i++) {
+			activate_func[i] = 1;
+		}
+	}
+	if(loss_func == undefined) {
+		loss_func = 1;
+	}
+	if(update_w_func == undefined) {
+		update_w_func = 1;
+	}
+	return mlt_addon.mlt_mlp(layout, datas, label, learn_rate, limit, predict_data, 
+						activate_func, loss_func, update_w_func);
+};
+
 ipcMain.on("ping", function (event, arg) {
 	var msg_array = arg.split('|');
 	if(msg_array[0] == 'page_handle') {
 		page_handle = event;
 		try {
+			var addon_math = '../addon/mathlabtool';
+			// var addon_math = 'D:/mlt_addon/addon/build/Release/mathlabtool';
 			mlt_addon = require(addon_math);
 		} catch (e) {
 			page_handle.sender.send('pong', 'page_console_log|' + e.toString() + '\n');

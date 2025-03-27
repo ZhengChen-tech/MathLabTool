@@ -22,11 +22,6 @@ const lib = WebAssembly.instantiate(new Uint8Array(buf)).
    }
 );
 
-global.addon_math = '../addon/mathlabtool';
-// var addon_math = 'D:/mlt_addon/addon/build/Release/mathlabtool';
-
-var mlt_addon = null;
-global.page_handle = null;
 var sp = null;
 var cpu_lenth = os.cpus().length;
 // console.log('cpu len', os.cpus().length);
@@ -984,10 +979,6 @@ global.mlt_liner_r = function(data) {
 
 global.mlt_low_pass = function(data, kernel_size) {
 	return mlt_addon.mlt_low_pass(data, kernel_size);
-};
-
-global.mlt_mlp = function(layout, datas, label, learn_rate, limit, predict_data) {
-	return mlt_addon.mlt_mlp(layout, datas, label, learn_rate, limit, predict_data);
 };
 
 let mainWindow;

@@ -14,13 +14,17 @@ require('./src/mlt_api_shell');
 // chcp 65001 && 
 // node-gyp configure rebuild
 
-const buf = fs.readFileSync('public/wasm_lib/mlt_API.wasm');
-const lib = WebAssembly.instantiate(new Uint8Array(buf)).
-   then(res => {
-      var add = res.instance.exports.add(2021, 2000);
-	  console.log(add);
-   }
-);
+const mlt_wasm_api = require('./public/wasm_lib/mlt_API.js');
+// console.log(mlt_wasm_api);
+// var mlt_wasm_api = null;
+// const buf = fs.readFileSync('public/wasm_lib/mlt_API.wasm');
+// const lib = WebAssembly.instantiate(new Uint8Array(buf)).
+   // then(res => {
+		// mlt_wasm_api = res.instance.exports;
+		// var add = res.instance.exports.add(2021, 2000);
+		// console.log(add);
+   // }
+// );
 
 var sp = null;
 var cpu_lenth = os.cpus().length;
@@ -979,6 +983,31 @@ global.mlt_liner_r = function(data) {
 
 global.mlt_low_pass = function(data, kernel_size) {
 	return mlt_addon.mlt_low_pass(data, kernel_size);
+};
+
+global.array_heap_ptr = function(data_array, type_size, heap, heap_offset) {
+	var ptr = mlt_wasm_api._malloc(data_array.length * type_size);
+	for (var i = 0; i < data_array.length; i++) {
+		heap[(ptr >> heap_offset) + i] = data_array[i];
+	}
+	return ptr;
+}
+
+global.mlt_taylor_itplt_sin = function(radian, n) {
+	return mlt_wasm_api._cgm_taylor_itplt_sin(radian, n);
+};
+
+global.mlt_newton_interpolation = function(x, y, n, val) {
+	var x_ptr = global.array_heap_ptr(x, Float32Array.BYTES_PER_ELEMENT, mlt_wasm_api.HEAPF32, 2);
+	var y_ptr = global.array_heap_ptr(y, Float32Array.BYTES_PER_ELEMENT, mlt_wasm_api.HEAPF32, 2);
+	
+	mlt_wasm_api._cgm_divided_difference(x_ptr, y_ptr, n);
+	var ret = mlt_wasm_api._cgm_newton_interpolation(x_ptr, y_ptr, n, val);
+	
+	mlt_wasm_api._free(x_ptr);
+	mlt_wasm_api._free(y_ptr);
+
+	return ret;
 };
 
 let mainWindow;

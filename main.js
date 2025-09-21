@@ -14,7 +14,7 @@ require('./src/mlt_api_shell');
 // chcp 65001 && 
 // node-gyp configure rebuild
 
-const mlt_wasm_api = require('./public/wasm_lib/mlt_API.js');
+const mlt_wasm_api = require('./src/wasm_lib/mlt_API.js');
 // console.log(mlt_wasm_api);
 // var mlt_wasm_api = null;
 // const buf = fs.readFileSync('public/wasm_lib/mlt_API.wasm');
